@@ -5,13 +5,13 @@
 package com.paymentchain.customer.repository;
 
 import com.paymentchain.customer.entities.Customer;
-import jakarta.persistence.Id;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 
 /**
  *
  * @author karlo
  */
-public interface CustomerRepository extends JpaRepository<Customer, Id> {
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
     
 }
