@@ -4,8 +4,11 @@ public class PrimitivosBoolean {
         boolean datoLogico = true;
         System.out.println("datoLogico = " + datoLogico);
         
-        double d = 33131.42-2; // 331.3142
-        float f = 12323f; //
+        double d = 98765.43e-3; // 98.76543
+        System.out.println("d = " + d);
+        
+        float f = 1.2345e2f; // 123.45
+        System.out.println("f = " + f);
         
         datoLogico = d < f;
         System.out.println("datoLogico = " + datoLogico);

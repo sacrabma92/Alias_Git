@@ -1,18 +1,14 @@
 public class PrimitivosCaracteres {
     public static void main(String[] args) {
-        char unicode = '\u0040';
+        char caracter = '\u0040';
         char decimal = 64;
-        System.out.println("unicode = " + unicode);
+        System.out.println("caracter = " + caracter);
         System.out.println("decimal = " + decimal);
-        System.out.println("¿ Decimal == Unidode ? : " + (decimal == unicode));
+        System.out.println("decimal = caracter: " + (decimal == caracter));
 
-        System.out.println("######################");
-        
-        char simbol = '@';
-        System.out.println("simbol = " + simbol);
-        System.out.println("¿ Decimal == Unidode ? : " + (simbol == unicode));
-
-        System.out.println("######################");
+        char simbolo = '@';
+        System.out.println("simbolo = " + simbolo);
+        System.out.println("simbolo = caracter: " + (simbolo == caracter));
 
         char espacio = '\u0020';
         char retroceso = '\b';
@@ -20,11 +16,9 @@ public class PrimitivosCaracteres {
         char nuevaLinea = '\n';
         char retornoCarro = '\r';
 
-        System.out.println("Char corresponde en byte:" + espacio + Character.BYTES);
-        System.out.println("Char corresponde en Bits = " + Character.SIZE);
-        System.out.println("Character.MAX_VALUE = " + Character.MAX_VALUE);
+        System.out.println("char corresponde en byte:" + System.lineSeparator() + Character.BYTES);
+        System.out.println("Char corresponde en bites = " + Character.SIZE);
         System.out.println("Character.MIN_VALUE = " + Character.MIN_VALUE);
-
-        System.out.println("######################");
+        System.out.println("Character.MAX_VALUE = " + Character.MAX_VALUE);
     }
 }

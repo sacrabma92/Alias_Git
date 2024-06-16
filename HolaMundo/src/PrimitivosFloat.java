@@ -1,27 +1,22 @@
 public class PrimitivosFloat {
-
-    static float varFlotante = 45.36F;
-
     public static void main(String[] args) {
-        float real = 2350F;
-        System.out.println("numeroFloat= " + real);
-        System.out.println("Tipo Float corresponde en byte a " + Float.BYTES );
-        System.out.println("Tipo Float corresponde en bites a " + Float.SIZE );
-        System.out.println("Valor máximo en byte " + Float.MAX_VALUE );
-        System.out.println("Valor minimo en byte " + Float.MIN_VALUE );
 
-        System.out.println("######################");
+        float realFloat = 0.00000000015f; //1.5e-10f;
+        System.out.println("realFloat = " + realFloat);
+        System.out.println("float corresponde en byte a = " + Float.BYTES);
+        System.out.println("float corresponde en bites a = " + Float.SIZE);
+        System.out.println("máximo valor para float = " + Float.MAX_VALUE);
+        System.out.println("mínimo valor para float = " + Float.MIN_VALUE);
+        
+        double realDouble = 3.4028235E39;
+        System.out.println("realDouble = " + realDouble);
 
-        double realDoubble = 3.4028235E38D;
-        System.out.println("numeroDouble= " + realDoubble);
-        System.out.println("Tipo Double corresponde en byte a " + Double.BYTES );
-        System.out.println("Tipo Double corresponde en bites a " + Double.SIZE );
-        System.out.println("Valor máximo en byte " + Double.MAX_VALUE );
-        System.out.println("Valor minimo en byte " + Double.MIN_VALUE );
+        System.out.println("double corresponde en byte a = " + Double.BYTES);
+        System.out.println("double corresponde en bites a = " + Double.SIZE);
+        System.out.println("máximo valor para double = " + Double.MAX_VALUE);
+        System.out.println("mínimo valor para double = " + Double.MIN_VALUE);
 
-        System.out.println("######################");
-
-        // float varFlotante = 3.1416F;
+        float varFlotante = 3.1416f;
         System.out.println("varFlotante = " + varFlotante);
     }
 }
