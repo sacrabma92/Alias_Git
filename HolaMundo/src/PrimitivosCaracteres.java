@@ -17,6 +17,8 @@ public class PrimitivosCaracteres {
         char espacio = '\u0020';
         char retroceso = '\b';
         char tabulador = '\t';
+        char nuevaLinea = '\n';
+        char retornoCarro = '\r';
 
         System.out.println("Char corresponde en byte:" + espacio + Character.BYTES);
         System.out.println("Char corresponde en Bits = " + Character.SIZE);
