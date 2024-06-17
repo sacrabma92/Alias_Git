@@ -1,4 +1,4 @@
-public class EjemploStringMetodosArreglo {
+public class  EjemploStringMetodosArreglo {
     public static void main(String[] args) {
         
 
