@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class ProductoRepository {
@@ -64,7 +65,28 @@ public class ProductoRepository {
 
     // Eliminar un producto
     public String delete(Integer id){
-        productos.remove(x -> x.getId() == id);
+        productos.removeIf(x -> x.getId() == id);
         return null;
+    }
+    
+    public Producto update(Producto producto){
+        int idPos = 0;
+        int id = 0;
+        
+        // Comprobamos si existe el producto y obtenermos la posicion y ID del producto
+        for(int i = 0; i < productos.size(); i++){
+            if(productos.get(i).getId() == (producto.getId())){
+                id = producto.getId(); // Id del producto
+                idPos = i; // posicion
+            }
+        }
+        
+        Producto producto1 = new Producto();
+        producto1.setId(id);
+        producto1.setNombre(producto.getNombre());
+        producto1.setCantidad(producto.getCantidad());
+        producto1.setPrecio(producto.getPrecio());
+        productos.set(idPos, producto);
+        return producto1;
     }
 }
