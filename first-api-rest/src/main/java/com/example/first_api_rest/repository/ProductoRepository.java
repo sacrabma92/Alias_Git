@@ -46,6 +46,25 @@ public class ProductoRepository {
     // Buscar producto por nombre
     public List<Producto> search(String nombre){
         return productos.stream()
-                .filter(x -> x.getNombre)
+                .filter(x -> x.getNombre().startsWith(nombre))
+                .collect(Collectors.toList());
+    }
+
+    // Guardar un producto
+    public Producto save(Producto p){
+        Producto producto = new Producto();
+        producto.setId(p.getId());
+        producto.setNombre(p.getNombre());
+        producto.setCantidad(p.getCantidad());
+        producto.setPrecio(p.getPrecio());
+
+        productos.add(producto);
+        return producto;
+    }
+
+    // Eliminar un producto
+    public String delete(Integer id){
+        productos.remove(x -> x.getId() == id);
+        return null;
     }
 }
