@@ -1,7 +1,6 @@
 package com.example.first_api_rest.repository;
 
 import com.example.first_api_rest.model.Producto;
-import com.fasterxml.jackson.databind.util.ClassUtil;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
