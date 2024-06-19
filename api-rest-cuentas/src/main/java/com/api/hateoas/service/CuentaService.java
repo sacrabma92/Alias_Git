@@ -18,4 +18,16 @@ public class CuentaService {
     public List<Cuenta> listAll(){
         return cuentaRepository.findAll();
     }
+    
+    public Cuenta get(Integer id){
+        return cuentaRepository.findById(id).get();
+    }
+    
+    public Cuenta save(Cuenta cuenta){
+        return cuentaRepository.save(cuenta);
+    }
+    
+    public void delete(Integer id){
+        cuentaRepository.deleteById(id);
+    }
 }
