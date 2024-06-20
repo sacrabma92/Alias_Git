@@ -54,7 +54,7 @@ public class EncuestaController {
       return new ResponseEntity<>(HttpStatus.OK);
    }
 
-   @DeleteMapping("/{encuestaId}")
+   @DeleteMapping("/encuestas/{encuestaId}")
    public ResponseEntity<?> eliminarEncuesta(@PathVariable Long encuestaId){
       encuestaRepository.deleteById(encuestaId);
       return new ResponseEntity<>(HttpStatus.OK); 
