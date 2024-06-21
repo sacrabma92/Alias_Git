@@ -50,7 +50,7 @@ public class EncuestaController {
    @PutMapping("/encuestas/{encuetaId}")
    public ResponseEntity<?> actualizarEncuesta(@RequestBody Encuesta encuesta, @PathVariable Long encuetaId){
       encuesta.setId(encuetaId);
-      Encuesta e = encuestaRepository.save(encuesta);
+      encuestaRepository.save(encuesta);
       return new ResponseEntity<>(HttpStatus.OK);
    }
 
@@ -58,5 +58,5 @@ public class EncuestaController {
    public ResponseEntity<?> eliminarEncuesta(@PathVariable Long encuestaId){
       encuestaRepository.deleteById(encuestaId);
       return new ResponseEntity<>(HttpStatus.OK); 
-   }
+   } 
 }
