@@ -1,5 +1,5 @@
 
-package bean;
+package net.javaguides.springboot.bean;
 
 public class Student {
     private int id;
