@@ -2,6 +2,7 @@ package com.api.rest.api_rest_encuentas.controller;
 
 import com.api.rest.api_rest_encuentas.model.Encuesta;
 import com.api.rest.api_rest_encuentas.repository.EncuestaRepository;
+import exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,7 @@ public class EncuestaController {
 
    @GetMapping("/encuestas/{encuestaId}")
    public ResponseEntity<?> obtenerEncuesta(@PathVariable Long encuestaId){
+       verifyEncuesta(encuestaId);
       Optional<Encuesta> encuesta = encuestaRepository.findById(encuestaId);
 
       if(encuesta.isPresent()){
@@ -49,6 +51,7 @@ public class EncuestaController {
 
    @PutMapping("/encuestas/{encuetaId}")
    public ResponseEntity<?> actualizarEncuesta(@RequestBody Encuesta encuesta, @PathVariable Long encuetaId){
+       verifyEncuesta(encuetaId);
       encuesta.setId(encuetaId);
       encuestaRepository.save(encuesta);
       return new ResponseEntity<>(HttpStatus.OK);
@@ -56,7 +59,15 @@ public class EncuestaController {
 
    @DeleteMapping("/encuestas/{encuestaId}")
    public ResponseEntity<?> eliminarEncuesta(@PathVariable Long encuestaId){
+       verifyEncuesta(encuestaId);
       encuestaRepository.deleteById(encuestaId);
       return new ResponseEntity<>(HttpStatus.OK); 
    } 
+   
+   protected void verifyEncuesta(Long encuestaId){
+       Optional<Encuesta> encuesta = encuestaRepository.findById(encuestaId);
+       if(!encuesta.isPresent()){
+           throw new ResourceNotFoundException("Encuesta no encontrada");
+       }
+   }
 }
