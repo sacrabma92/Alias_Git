@@ -30,7 +30,7 @@ public class ProductController {
       return ResponseEntity.notFound().build();
    }
 
-   @GetMapping("/productId")
+   @GetMapping("/{productId}")
    public ResponseEntity<Product> findByOneId(@PathVariable Long productId){
       Optional<Product> product = productService.findOneById(productId);
 

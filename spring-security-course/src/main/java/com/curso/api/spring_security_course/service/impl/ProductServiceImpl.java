@@ -33,7 +33,7 @@ public class ProductServiceImpl implements ProductService {
     public Product createOne(SaveProduct saveProduct) {
 
         Product product = new Product();
-        product.setNombre(saveProduct.getName());
+        product.setName(saveProduct.getName());
         product.setPrice(saveProduct.getPrice());
         product.setStatus(Product.ProductStatus.ENABLED);
 
@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
         Product productFromDB = productRepository.findById(productId)
                         .orElseThrow(() -> new ObjectNotFoundException("Product not found with id " + productId));
 
-        productFromDB.setNombre(saveProduct.getName());
+        productFromDB.setName(saveProduct.getName());
         productFromDB.setPrice(saveProduct.getPrice());
 
         Category category = new Category();

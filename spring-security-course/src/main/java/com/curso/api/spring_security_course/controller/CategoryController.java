@@ -30,7 +30,7 @@ public class CategoryController {
       return ResponseEntity.notFound().build();
    }
 
-   @GetMapping("/categoryId")
+   @GetMapping("/{categoryId}")
    public ResponseEntity<Category> findByOneId(@PathVariable Long categoryId){
       Optional<Category> category = categoryService.findOneById(categoryId);
 
