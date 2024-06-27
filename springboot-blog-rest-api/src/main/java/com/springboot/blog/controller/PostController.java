@@ -1,7 +1,9 @@
 
 package com.springboot.blog.controller;
 
+import com.springboot.blog.Utils.PaginationConstants;
 import com.springboot.blog.dto.PostDto;
+import com.springboot.blog.dto.PostResponse;
 import com.springboot.blog.entity.Post;
 import com.springboot.blog.service.PostService;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,45 @@ public class PostController {
     @GetMapping
     public List<PostDto> getAllPosts(){
         return postService.getAllPosts();
+    }
+
+    // Obtener todos los post pero con paginación
+    @GetMapping("paginated")
+    public List<PostDto> getAllPostsPaginated(
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "10", required = false) int pageSize
+    ){
+        return postService.getAllPostsPaginated(pageNo, pageSize);
+    }
+
+    // Obtener todos los post pero con paginación y datos adicionales
+    @GetMapping("paginateandinformation")
+    public PostResponse getAllPostsPaginatedMoreInformation(
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "7", required = false) int pageSize
+    ){
+        return postService.getAllPostsPaginatedMoreInformation(pageNo, pageSize);
+    }
+
+    // Obtener todos los post pero con paginación y datos adicionales y Ordenamiento
+    @GetMapping("paginateandinformationandsort")
+    public PostResponse getAllPostsPaginatedMoreInformationAndSort(
+            @RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "7", required = false) int pageSize,
+            @RequestParam(value = "sortBy", defaultValue = "id", required = false) String sortBy
+    ){
+        return postService.getAllPostsPaginatedMoreInformationAndSort(pageNo, pageSize, sortBy);
+    }
+
+    // Obtener todos los post pero con paginación y datos adicionales, Ordenamiento y Forma de Ordenar
+    @GetMapping("paginateandinformationandsortOrderBy")
+    public PostResponse getAllPostsPaginatedMoreInformationAndSortOrderBy(
+            @RequestParam(value = "pageNo", defaultValue = PaginationConstants.DEFAULT_PAGE_NUMBER, required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = PaginationConstants.DEFAULT_PAGE_SIZE, required = false) int pageSize,
+            @RequestParam(value = "sortBy", defaultValue = PaginationConstants.DEFAULT_SORT_BY, required = false) String sortBy,
+            @RequestParam(value = "sortDir", defaultValue = PaginationConstants.DEFAULT_SORT_DIRECTION, required = false) String sortDir
+    ){
+        return postService.getAllPostsPaginatedMoreInformationAndSortOrderBy(pageNo, pageSize, sortBy, sortDir);
     }
 
     // Obtener Post por Id
