@@ -4,7 +4,6 @@ package com.springboot.blog.controller;
 import com.springboot.blog.Utils.PaginationConstants;
 import com.springboot.blog.dto.PostDto;
 import com.springboot.blog.dto.PostResponse;
-import com.springboot.blog.entity.Post;
 import com.springboot.blog.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
