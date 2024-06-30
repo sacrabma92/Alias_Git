@@ -1,4 +1,4 @@
-package org.example.ModelMapper.Dto;
+package OrikaMapper.Dto;
 
 public class PersonCustomDTO {
    private Long idDTO;

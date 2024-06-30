@@ -1,4 +1,4 @@
-package org.example.ModelMapper.Entities;
+package Mapstruct.Entities;
 
 public class Person {
    private Long id;

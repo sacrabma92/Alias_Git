@@ -8,6 +8,18 @@ public class PersonDefaultDTO {
    private Byte age;
    private Character gender;
 
+   @Override
+   public String toString() {
+      return "PersonDefaultDTO{" +
+              "id=" + id +
+              ", name='" + name + '\'' +
+              ", lasName='" + lasName + '\'' +
+              ", email='" + email + '\'' +
+              ", age=" + age +
+              ", gender=" + gender +
+              '}';
+   }
+
    public PersonDefaultDTO() {
    }
 

@@ -1,4 +1,4 @@
-package org.example.ModelMapper.Dto;
+package Mapstruct.Dto;
 
 public class PersonCustomDTO {
    private Long idDTO;

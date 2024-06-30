@@ -1,6 +1,6 @@
-package org.example.ModelMapper.Entities;
+package Mapstruct.Dto;
 
-public class Person {
+public class PersonDefaultDTO {
    private Long id;
    private String name;
    private String lasName;
@@ -8,12 +8,9 @@ public class Person {
    private Byte age;
    private Character gender;
 
-   public Person() {
-   }
-
    @Override
    public String toString() {
-      return "Person{" +
+      return "PersonDefaultDTO{" +
               "id=" + id +
               ", name='" + name + '\'' +
               ", lasName='" + lasName + '\'' +
@@ -23,7 +20,10 @@ public class Person {
               '}';
    }
 
-   public Person(Long id, String name, String lasName, String email, Byte age, Character gender) {
+   public PersonDefaultDTO() {
+   }
+
+   public PersonDefaultDTO(Long id, String name, String lasName, String email, Byte age, Character gender) {
       this.id = id;
       this.name = name;
       this.lasName = lasName;
