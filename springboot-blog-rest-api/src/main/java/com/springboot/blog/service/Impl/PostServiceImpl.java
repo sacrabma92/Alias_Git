@@ -15,14 +15,18 @@ import com.springboot.blog.entity.Post;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.modelmapper.ModelMapper;
 
 @Service
 public class PostServiceImpl implements PostService{
     
     private PostRepository postRepository;
+    
+    private ModelMapper mapper;
 
-    public PostServiceImpl(PostRepository PostRepository) {
+    public PostServiceImpl(PostRepository PostRepository, ModelMapper mapper) {
         this.postRepository = PostRepository;
+        this.mapper = mapper;
     }
 
     @Override
@@ -169,20 +173,13 @@ public class PostServiceImpl implements PostService{
 
     // Convertir Entity a Dto
     private PostDto mapToDto(Post post){
-        PostDto postDto = new PostDto();
-        postDto.setId(post.getId());
-        postDto.setTitle(post.getTitle());
-        postDto.setDescription(post.getDescription());
-        postDto.setContent(post.getContent());
+        PostDto postDto = mapper.map(post, PostDto.class);
         return postDto;
     }
 
     // Convetir Dto a Entity
     private Post mapToEntity(PostDto postDto){
-        Post post = new Post();
-        post.setTitle(postDto.getTitle());
-        post.setDescription(postDto.getDescription());
-        post.setContent(postDto.getContent());
+        Post post = mapper.map(postDto, Post.class);
         return post;
     }
 
