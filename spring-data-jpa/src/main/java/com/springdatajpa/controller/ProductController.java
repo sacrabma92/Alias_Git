@@ -42,4 +42,22 @@ public class ProductController {
         List<ProductDTO> savedProducts = productService.saveAllProducts(productsDTO);
         return new ResponseEntity<>(savedProducts, HttpStatus.CREATED);
     }
+
+    // Obtener todos los productos
+    @GetMapping
+    public List<ProductDTO> getAllProducts(){
+        return productService.getAllProducts();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteProductById(@PathVariable(name = "id") Long id){
+        productService.deleteProductById(id);
+        return new ResponseEntity<>("Entidad Product eliminada con exito", HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleteAll")
+    public ResponseEntity<Void> deleteAllProducts() {
+        productService.deleteAllProducts();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

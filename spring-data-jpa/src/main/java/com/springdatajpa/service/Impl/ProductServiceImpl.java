@@ -93,6 +93,23 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<ProductDTO> getAllProducts() {
+        List<Product> products = productRepository.findAll();
+        return products.stream().map(product -> mapToDto(product)).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteProductById(Long id) {
+        Product product = productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product","id",id));
+        productRepository.delete(product);
+    }
+
+    @Override
+    public void deleteAllProducts() {
+        productRepository.deleteAll();
+    }
+
     // Convertir Entity a Dto
     private ProductDTO mapToDto(Product product){
         ProductDTO productDTO = mapper.map(product, ProductDTO.class);
