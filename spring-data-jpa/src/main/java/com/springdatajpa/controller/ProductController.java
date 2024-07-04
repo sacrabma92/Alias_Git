@@ -2,6 +2,7 @@ package com.springdatajpa.controller;
 
 import com.springdatajpa.Dto.ProductDTO;
 import com.springdatajpa.service.ProductService;
+import jakarta.validation.Valid;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,12 +18,12 @@ public class ProductController {
 
     // CreatePost
     @PostMapping
-    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO){
+    public ResponseEntity<ProductDTO> createProduct(@Valid @RequestBody ProductDTO productDTO){
         return new ResponseEntity<>(productService.createProduct(productDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO productDTO,@PathVariable(name = "id") Long id){
+    public ResponseEntity<ProductDTO> updateProduct(@Valid @RequestBody ProductDTO productDTO,@PathVariable(name = "id") Long id){
         ProductDTO productResponse = productService.updateProduct(productDTO, id);
         return new ResponseEntity<>(productResponse,HttpStatus.OK);
     }

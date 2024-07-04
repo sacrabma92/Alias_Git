@@ -1,6 +1,8 @@
 package com.springdatajpa.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,11 +34,16 @@ public class Product {
    @Column(name = "stock_keeping_unit", nullable = false)
    private String sku;
 
-   @Column(nullable = false)
+
    private String name;
+
+
    private String description;
+
    private BigDecimal price;
+
    private boolean active;
+
    private String imageUrl;
 
    @CreationTimestamp

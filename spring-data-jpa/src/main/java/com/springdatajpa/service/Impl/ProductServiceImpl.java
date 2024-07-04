@@ -2,6 +2,7 @@ package com.springdatajpa.service.Impl;
 
 import com.springdatajpa.Dto.ProductDTO;
 import com.springdatajpa.entity.Product;
+import com.springdatajpa.exceptions.ResourceNotFoundException;
 import com.springdatajpa.repository.ProductRepository;
 import com.springdatajpa.service.ProductService;
 import org.modelmapper.ModelMapper;
@@ -32,7 +33,8 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO updateProduct(ProductDTO productDTO, Long id) {
         // Obtenemos un producto por id, en caso que no exista lanzamos exception
-        Product productById = productRepository.findById(id).orElseThrow();
+        Product productById = productRepository.findById(id).orElseThrow(
+                ()-> new ResourceNotFoundException("Product","id", id));
 
         // Verificamos si el nuevo SKU ya existe y no pertenece al producto actual
         if (productDTO.getSku() != null && !productDTO.getSku().equals(productById.getSku())) {
@@ -65,7 +67,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDTO getProductById(Long id) {
-        Product product = productRepository.findById(id).orElseThrow();
+        Product product = productRepository.findById(id).orElseThrow(
+                ()-> new ResourceNotFoundException("Post","id", id));
         return mapToDto(product);
     }
 

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class   SpringDataJpaApplication {
-
+	// Abstracción de Mapper
 	@Bean
 	public ModelMapper modelMapper(){
 		return new ModelMapper();
