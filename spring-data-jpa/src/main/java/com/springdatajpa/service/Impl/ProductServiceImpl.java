@@ -9,6 +9,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -70,6 +73,24 @@ public class ProductServiceImpl implements ProductService {
         Product product = productRepository.findById(id).orElseThrow(
                 ()-> new ResourceNotFoundException("Product","id", id));
         return mapToDto(product);
+    }
+
+    @Override
+    public List<ProductDTO> saveAllProducts(List<ProductDTO> products) {
+        // Convertir la lista de ProductDTO a una lista de entidades Product
+        List<Product> entities = products.stream()
+                // Utilizar el método mapToEntity para convertir cada ProductDTO en una entidad Product
+                .map(this::mapToEntity)
+                // Almacenamos los resultados en una lista
+                .collect(Collectors.toList());
+
+        // Guardar todas las entidades Product en la base de datos
+        List<Product> savedEntities = productRepository.saveAll(entities);
+
+        // Convertir la lista de entidades Product guardadas de nuevo a una lista de ProductDTO
+        return savedEntities.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
     }
 
     // Convertir Entity a Dto

@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("product")
 public class ProductController {
@@ -32,5 +34,12 @@ public class ProductController {
     @GetMapping("/{id}")
     public ResponseEntity<ProductDTO> getProductById(@PathVariable(name = "id") Long id){
         return ResponseEntity.ok(productService.getProductById(id));
+    }
+
+    // Guardamos varios productos al mismo tiempo.
+    @PostMapping("/saveAll")
+    public ResponseEntity<List<ProductDTO>> saveAll(@RequestBody List<ProductDTO> productsDTO) {
+        List<ProductDTO> savedProducts = productService.saveAllProducts(productsDTO);
+        return new ResponseEntity<>(savedProducts, HttpStatus.CREATED);
     }
 }
