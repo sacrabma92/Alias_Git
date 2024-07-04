@@ -45,5 +45,4 @@ public class Product {
    @UpdateTimestamp
    private LocalDateTime lastUpdated;
 
-
 }

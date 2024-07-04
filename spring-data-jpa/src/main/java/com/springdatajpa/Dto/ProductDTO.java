@@ -1,6 +1,5 @@
 package com.springdatajpa.Dto;
 
-import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -12,7 +11,7 @@ public class ProductDTO {
     private String name;
     private String description;
     private BigDecimal price;
-    private boolean active;
+    private Boolean active;
     private String imageUrl;
 
 }

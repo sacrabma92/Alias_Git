@@ -29,6 +29,40 @@ public class ProductServiceImpl implements ProductService {
         return productResponse;
     }
 
+    @Override
+    public ProductDTO updateProduct(ProductDTO productDTO, Long id) {
+        // Obtenemos un producto por id, en caso que no exista lanzamos exception
+        Product productById = productRepository.findById(id).orElseThrow();
+
+        // Verificamos si el nuevo SKU ya existe y no pertenece al producto actual
+        if (productDTO.getSku() != null && !productDTO.getSku().equals(productById.getSku())) {
+            boolean exists = productRepository.existsBySku(productDTO.getSku());
+        }
+
+        // Actualizamos todos los campos excepto el SKU
+        if (productDTO.getName() != null) {
+            productById.setName(productDTO.getName());
+        }
+        if (productDTO.getDescription() != null) {
+            productById.setDescription(productDTO.getDescription());
+        }
+        if (productDTO.getPrice() != null) {
+            productById.setPrice(productDTO.getPrice());
+        }
+        if (productDTO.getActive() != null) {
+            productById.setActive(productDTO.getActive());
+        }
+        if (productDTO.getImageUrl() != null) {
+            productById.setImageUrl(productDTO.getImageUrl());
+        }
+
+        // Guardamos en BD
+        Product updatedProduct = productRepository.save(productById);
+
+        // Retornamos los datos almacenados en la BD
+        return mapToDto(updatedProduct);
+    }
+
     // Convertir Entity a Dto
     private ProductDTO mapToDto(Product product){
         ProductDTO productDTO = mapper.map(product, ProductDTO.class);
