@@ -2,6 +2,7 @@ package com.springdatajpa.controller;
 
 import com.springdatajpa.Dto.ProductDTO;
 import com.springdatajpa.service.ProductService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,5 +25,11 @@ public class ProductController {
     public ResponseEntity<ProductDTO> updateProduct(@RequestBody ProductDTO productDTO,@PathVariable(name = "id") Long id){
         ProductDTO productResponse = productService.updateProduct(productDTO, id);
         return new ResponseEntity<>(productResponse,HttpStatus.OK);
+    }
+
+    // Obtener producto Por id
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable(name = "id") Long id){
+        return ResponseEntity.ok(productService.getProductById(id));
     }
 }

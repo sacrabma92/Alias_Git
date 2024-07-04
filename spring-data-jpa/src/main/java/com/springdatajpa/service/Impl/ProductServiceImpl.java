@@ -63,6 +63,12 @@ public class ProductServiceImpl implements ProductService {
         return mapToDto(updatedProduct);
     }
 
+    @Override
+    public ProductDTO getProductById(Long id) {
+        Product product = productRepository.findById(id).orElseThrow();
+        return mapToDto(product);
+    }
+
     // Convertir Entity a Dto
     private ProductDTO mapToDto(Product product){
         ProductDTO productDTO = mapper.map(product, ProductDTO.class);
