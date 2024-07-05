@@ -1,6 +1,8 @@
 package com.springdatajpa.service;
 
 import com.springdatajpa.Dto.ProductDTO;
+
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,4 +42,13 @@ public interface ProductService {
     List<ProductDTO> findProductsByPriceLessThan(Double price); // Método para encontrar productos con precio menor que un valor dado
 
     List<ProductDTO> findProductsByDescriptionContaining(String description); // Método para encontrar productos cuya descripción contenga una cadena dada
+
+    // Método para encontrar productos cuya descripción contenga una cadena dada usando LIKE
+    List<ProductDTO> findProductsByDescriptionLike(String description);
+
+    // Método para encontrar productos cuyo precio esté dentro de un rango específico
+    List<ProductDTO> findProductsByPriceBetween(Double startPrice, Double endPrice);
+
+    // Método para encontrar productos cuya fecha esté dentro de un rango específico
+    List<ProductDTO> findProductsByDateBetween(Date startDate, Date endDate);
 }

@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -186,6 +187,30 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDTO> findProductsByDescriptionContaining(String description) {
         List<Product> products = productRepository.findByDescriptionContaining(description);
+        return products.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductDTO> findProductsByDescriptionLike(String description) {
+        List<Product> products = productRepository.findByDescriptionLike("%" + description + "%");
+        return products.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductDTO> findProductsByPriceBetween(Double startPrice, Double endPrice) {
+        List<Product> products = productRepository.findByPriceBetween(startPrice, endPrice);
+        return products.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductDTO> findProductsByDateBetween(Date startDate, Date endDate) {
+        List<Product> products = productRepository.findByDateBetween(startDate, endDate);
         return products.stream()
                 .map(this::mapToDto)
                 .collect(Collectors.toList());

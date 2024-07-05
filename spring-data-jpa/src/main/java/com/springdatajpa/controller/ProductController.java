@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -126,6 +127,24 @@ public class ProductController {
     @GetMapping("/description-containing")
     public ResponseEntity<List<ProductDTO>> getProductsByDescriptionContaining(@RequestParam String description) {
         List<ProductDTO> products = productService.findProductsByDescriptionContaining(description);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping("/description-like")
+    public ResponseEntity<List<ProductDTO>> getProductsByDescriptionLike(@RequestParam String description) {
+        List<ProductDTO> products = productService.findProductsByDescriptionLike(description);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping("/price-range")
+    public ResponseEntity<List<ProductDTO>> getProductsByPriceRange(@RequestParam Double startPrice, @RequestParam Double endPrice) {
+        List<ProductDTO> products = productService.findProductsByPriceBetween(startPrice, endPrice);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping("/date-range")
+    public ResponseEntity<List<ProductDTO>> getProductsByDateRange(@RequestParam Date startDate, @RequestParam Date endDate) {
+        List<ProductDTO> products = productService.findProductsByDateBetween(startDate, endDate);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }
