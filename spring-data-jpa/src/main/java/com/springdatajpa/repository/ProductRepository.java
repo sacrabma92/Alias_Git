@@ -2,6 +2,8 @@ package com.springdatajpa.repository;
 
 import com.springdatajpa.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
@@ -33,5 +35,14 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByPriceBetween(Double startPrice, Double endPrice);
 
     // Método personalizado para encontrar productos cuya fecha esté dentro de un rango específico
-    List<Product> findByDateBetween(Date startDate, Date endDate);
+    List<Product> findByDateCreatedBetween(Date startDate, Date endDate);
+
+    @Query("SELECT p FROM Product p WHERE p.name = ?1 or p.description = ?2")
+    Product findByNameAndDescription(@Param("name") String name, @Param("description") String description);
+
+    @Query(
+            value = "SELECT * FROM products p WHERE p.name LIKE %:name% AND p.description LIKE %:description%",
+            nativeQuery = true
+    )
+    List<Product> searchByNameAndDescriptionNative( @Param("name") String name, @Param("description") String description);
 }

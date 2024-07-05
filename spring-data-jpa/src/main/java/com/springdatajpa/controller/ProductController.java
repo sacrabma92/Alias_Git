@@ -144,7 +144,19 @@ public class ProductController {
 
     @GetMapping("/date-range")
     public ResponseEntity<List<ProductDTO>> getProductsByDateRange(@RequestParam Date startDate, @RequestParam Date endDate) {
-        List<ProductDTO> products = productService.findProductsByDateBetween(startDate, endDate);
+        List<ProductDTO> products = productService.findProductsByDateCreatedBetween(startDate, endDate);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping("/searchQuery")
+    public ResponseEntity<ProductDTO> getProductsByNameAndDescription(@RequestParam String name, @RequestParam String description) {
+        ProductDTO products = productService.findProductsByNameAndDescription(name, description);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping("/search-native")
+    public ResponseEntity<List<ProductDTO>> getProductsByNameAndDescriptionNative(@RequestParam String name, @RequestParam String description) {
+        List<ProductDTO> products = productService.findProductsByNameAndDescriptionNative(name, description);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }

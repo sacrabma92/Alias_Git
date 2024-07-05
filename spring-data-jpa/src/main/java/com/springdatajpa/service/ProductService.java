@@ -50,5 +50,11 @@ public interface ProductService {
     List<ProductDTO> findProductsByPriceBetween(Double startPrice, Double endPrice);
 
     // Método para encontrar productos cuya fecha esté dentro de un rango específico
-    List<ProductDTO> findProductsByDateBetween(Date startDate, Date endDate);
+    List<ProductDTO> findProductsByDateCreatedBetween(Date startDate, Date endDate);
+
+    // Método para encontrar productos por nombre y descripción
+    ProductDTO findProductsByNameAndDescription(String name, String description);
+
+    // Método para encontrar productos por nombre y descripción
+    List<ProductDTO> findProductsByNameAndDescriptionNative(String name, String description);
 }

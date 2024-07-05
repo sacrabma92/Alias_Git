@@ -209,8 +209,22 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDTO> findProductsByDateBetween(Date startDate, Date endDate) {
-        List<Product> products = productRepository.findByDateBetween(startDate, endDate);
+    public List<ProductDTO> findProductsByDateCreatedBetween(Date startDate, Date endDate) {
+        List<Product> products = productRepository.findByDateCreatedBetween(startDate, endDate);
+        return products.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ProductDTO findProductsByNameAndDescription(String name, String description) {
+        Product products = productRepository.findByNameAndDescription(name, description);
+        return mapToDto(products);
+    }
+
+    @Override
+    public List<ProductDTO> findProductsByNameAndDescriptionNative(String name, String description) {
+        List<Product> products = productRepository.searchByNameAndDescriptionNative(name, description); // Llamar al método del repositorio
         return products.stream()
                 .map(this::mapToDto)
                 .collect(Collectors.toList());
