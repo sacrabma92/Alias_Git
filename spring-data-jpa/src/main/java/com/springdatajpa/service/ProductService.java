@@ -2,6 +2,7 @@ package com.springdatajpa.service;
 
 import com.springdatajpa.Dto.ProductDTO;
 import java.util.List;
+import java.util.Optional;
 
 public interface ProductService {
     ProductDTO createProduct(ProductDTO productDTO);
@@ -27,4 +28,10 @@ public interface ProductService {
     void enableProductById(Long id); // Método para activar un producto por ID
 
     List<ProductDTO> findAllEnabledProducts(); // Método para encontrar todos los productos habilitados
+
+    Optional<ProductDTO> findProductByName(String name); // Método para encontrar un producto por nombre
+
+    List<ProductDTO> findProductsByNameOrDescription(String search); // Metodo para buscar por nombre o descripcion
+
+    List<ProductDTO> findDistinctProductsByName(String name); // Método para encontrar productos con nombres distintos
 }

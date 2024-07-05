@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -140,6 +141,28 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDTO> findAllEnabledProducts() {
         List<Product> enabledProducts = productRepository.findByActiveTrue();
         return enabledProducts.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<ProductDTO> findProductByName(String name) {
+        Optional<Product> product = productRepository.findByName(name);
+        return product.map(this::mapToDto);
+    }
+
+    @Override
+    public List<ProductDTO> findProductsByNameOrDescription(String search) {
+        List<Product> products = productRepository.findByNameContainingOrDescriptionContaining(search, search);
+        return products.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductDTO> findDistinctProductsByName(String name) {
+        List<Product> products = productRepository.findDistinctByName(name);
+        return products.stream()
                 .map(this::mapToDto)
                 .collect(Collectors.toList());
     }

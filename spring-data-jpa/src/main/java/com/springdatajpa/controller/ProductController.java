@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("product")
@@ -89,5 +90,24 @@ public class ProductController {
     public ResponseEntity<List<ProductDTO>> getAllEnabledProducts() {
         List<ProductDTO> enabledProducts = productService.findAllEnabledProducts();
         return new ResponseEntity<>(enabledProducts, HttpStatus.OK);
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<ProductDTO> getProductByName(@PathVariable String name) {
+        Optional<ProductDTO> product = productService.findProductByName(name);
+        return product.map(ResponseEntity::ok)
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<ProductDTO>> getProductByNameOrDescription(@RequestParam String search){
+        List<ProductDTO> products = productService.findProductsByNameOrDescription(search);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping("/distinct")
+    public ResponseEntity<List<ProductDTO>> getDistinctProductsByName(@RequestParam String name) {
+        List<ProductDTO> products = productService.findDistinctProductsByName(name);
+        return new ResponseEntity<>(products, HttpStatus.OK);
     }
 }
