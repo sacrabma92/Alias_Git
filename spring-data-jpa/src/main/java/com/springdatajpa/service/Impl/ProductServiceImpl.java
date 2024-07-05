@@ -110,6 +110,40 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteAll();
     }
 
+    @Override
+    public long countProducts() {
+        return productRepository.count();
+    }
+
+    @Override
+    public boolean existsProductById(Long id) {
+        return productRepository.existsById(id);
+    }
+
+    @Override
+    public void disableProductById(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+        product.setActive(false);
+        productRepository.save(product);
+    }
+
+    @Override
+    public void enableProductById(Long id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+        product.setActive(true);
+        productRepository.save(product);
+    }
+
+    @Override
+    public List<ProductDTO> findAllEnabledProducts() {
+        List<Product> enabledProducts = productRepository.findByActiveTrue();
+        return enabledProducts.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
     // Convertir Entity a Dto
     private ProductDTO mapToDto(Product product){
         ProductDTO productDTO = mapper.map(product, ProductDTO.class);

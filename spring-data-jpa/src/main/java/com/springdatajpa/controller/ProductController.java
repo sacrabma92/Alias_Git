@@ -60,4 +60,34 @@ public class ProductController {
         productService.deleteAllProducts();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+    @GetMapping("/count")
+    public ResponseEntity<Long> countProducts() {
+        long count = productService.countProducts();
+        return new ResponseEntity<>(count, HttpStatus.OK);
+    }
+
+    @GetMapping("/exists/{id}")
+    public ResponseEntity<Boolean> existsProductById(@PathVariable Long id) {
+        boolean exists = productService.existsProductById(id);
+        return new ResponseEntity<>(exists, HttpStatus.OK);
+    }
+
+    @PutMapping("/disable/{id}")
+    public ResponseEntity<Void> disableProductById(@PathVariable Long id) {
+        productService.disableProductById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/enable/{id}")
+    public ResponseEntity<Void> enableProductById(@PathVariable Long id) {
+        productService.enableProductById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/enabled")
+    public ResponseEntity<List<ProductDTO>> getAllEnabledProducts() {
+        List<ProductDTO> enabledProducts = productService.findAllEnabledProducts();
+        return new ResponseEntity<>(enabledProducts, HttpStatus.OK);
+    }
 }
