@@ -20,4 +20,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findDistinctByName(String name); // Método personalizado para encontrar productos con nombres distintos
 
     List<Product> findByPriceGreaterThan(Double price); // Método personalizado para encontrar productos con precio mayor que un valor dado
+
+    List<Product> findByPriceLessThan(Double price); // Método personalizado para encontrar productos con precio menor que un valor dado
+
+    List<Product> findByDescriptionContaining(String description); // Método personalizado para encontrar productos cuya descripción contenga una cadena dada
 }

@@ -175,6 +175,22 @@ public class ProductServiceImpl implements ProductService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<ProductDTO> findProductsByPriceLessThan(Double price) {
+        List<Product> products = productRepository.findByPriceLessThan(price);
+        return products.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProductDTO> findProductsByDescriptionContaining(String description) {
+        List<Product> products = productRepository.findByDescriptionContaining(description);
+        return products.stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
     // Convertir Entity a Dto
     private ProductDTO mapToDto(Product product){
         ProductDTO productDTO = mapper.map(product, ProductDTO.class);

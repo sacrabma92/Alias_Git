@@ -116,4 +116,16 @@ public class ProductController {
         List<ProductDTO> products = productService.findProductsByPriceGreaterThan(price);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
+
+    @GetMapping("/precio-menor-que")
+    public ResponseEntity<List<ProductDTO>> getProductsByPriceLessThan(@RequestParam Double price) {
+        List<ProductDTO> products = productService.findProductsByPriceLessThan(price);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
+    @GetMapping("/description-containing")
+    public ResponseEntity<List<ProductDTO>> getProductsByDescriptionContaining(@RequestParam String description) {
+        List<ProductDTO> products = productService.findProductsByDescriptionContaining(description);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
 }
