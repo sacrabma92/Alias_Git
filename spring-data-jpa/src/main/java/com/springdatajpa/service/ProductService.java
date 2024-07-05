@@ -34,4 +34,6 @@ public interface ProductService {
     List<ProductDTO> findProductsByNameOrDescription(String search); // Metodo para buscar por nombre o descripcion
 
     List<ProductDTO> findDistinctProductsByName(String name); // Método para encontrar productos con nombres distintos
+
+    List<ProductDTO> findProductsByPriceGreaterThan(Double price); // Método para encontrar productos con precio mayor que un valor dado
 }

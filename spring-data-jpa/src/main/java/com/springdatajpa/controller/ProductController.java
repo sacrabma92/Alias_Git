@@ -110,4 +110,10 @@ public class ProductController {
         List<ProductDTO> products = productService.findDistinctProductsByName(name);
         return new ResponseEntity<>(products, HttpStatus.OK);
     }
+
+    @GetMapping("/precio-mayor-que")
+    public ResponseEntity<List<ProductDTO>> getProductsByPriceGreaterThan(@RequestParam Double price) {
+        List<ProductDTO> products = productService.findProductsByPriceGreaterThan(price);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
 }
