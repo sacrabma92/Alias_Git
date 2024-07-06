@@ -2,6 +2,10 @@ package com.springdatajpa.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -15,4 +19,10 @@ public class Address {
     private String state;
     private String country;
     private String zipCode;
+
+    @CreationTimestamp
+    private LocalDateTime dateCreated;
+
+    @UpdateTimestamp
+    private LocalDateTime lastUpdated;
 }

@@ -13,8 +13,6 @@ public class OrderDTO {
     private int totalQuantity;
     private BigDecimal totalPrice;
     private String status;
-    private LocalDateTime dateCreated;
-    private LocalDateTime lastUpdated;
 
     private AddressDTO address;
 }
