@@ -17,7 +17,9 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String username;
+
     private String name;
     private String password;
 
@@ -36,6 +38,7 @@ public class User implements UserDetails {
                 .map(each -> new SimpleGrantedAuthority(each))
                 .collect(Collectors.toList());
     }
+
 
     // Obtener el password
     @Override
