@@ -1,6 +1,8 @@
 package com.ms_security.controllers;
 
+import com.ms_security.entities.Role;
 import com.ms_security.entities.User;
+import com.ms_security.repository.RoleRepository;
 import com.ms_security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +17,9 @@ public class UsersController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @GetMapping
     public List<User> getUsers(){
@@ -55,4 +60,18 @@ public class UsersController {
         }
     }
 
+    @PutMapping("/{user_id}/role/{role_id}")
+    public User matchUserRole(@PathVariable String user_id,
+                              @PathVariable String role_id){
+        User usuarioActual = userRepository.findById(user_id).orElseThrow(null);
+        Role roleActual = roleRepository.findById(role_id).orElseThrow(null);
+
+        if(usuarioActual != null && roleActual != null){
+            usuarioActual.setRole(roleActual);
+
+            return userRepository.save(usuarioActual);
+        }else{
+            return null;
+        }
+    }
 }
