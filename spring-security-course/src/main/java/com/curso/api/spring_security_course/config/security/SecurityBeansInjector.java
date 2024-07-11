@@ -27,8 +27,11 @@ public class SecurityBeansInjector {
    // Vamos a crear nuestra estrategia de autenticación
    @Bean
    public AuthenticationProvider authenticationProvider(){
+      // Objeto que nos proporciona de metodos propios para comparar contraseñas y traer el usuario
       DaoAuthenticationProvider authenticationStrategy = new DaoAuthenticationProvider();
+      // Nos compara la contraseña que esta en la BD y la que le estamos enviando
       authenticationStrategy.setPasswordEncoder( passwordEncoder() );
+      // Carga el usuario con el username que le estaos enviando
       authenticationStrategy.setUserDetailsService( userDetailsService() );
       return  authenticationStrategy;
    }
