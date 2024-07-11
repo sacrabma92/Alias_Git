@@ -1,6 +1,5 @@
 package com.curso.api.spring_security_course.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
