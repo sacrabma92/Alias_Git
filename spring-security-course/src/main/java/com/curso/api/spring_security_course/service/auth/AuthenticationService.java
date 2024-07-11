@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
+
 
 @Service
 public class AuthenticationService {
@@ -39,7 +39,7 @@ public class AuthenticationService {
         return userDto;
     }
 
-    private Map<String, Objects> generateExtraClaims(User user) {
+    private Map<String, Object> generateExtraClaims(User user) {
         Map<String, Object> extraClaims = new HashMap<>();
         extraClaims.put("name", user.getName());
         extraClaims.put("role", user.getRole().name());
@@ -47,4 +47,6 @@ public class AuthenticationService {
 
         return extraClaims;
     }
+
+
 }
