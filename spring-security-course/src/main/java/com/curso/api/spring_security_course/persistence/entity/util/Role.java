@@ -1,4 +1,4 @@
-package com.curso.api.spring_security_course.persistence.repository.util;
+package com.curso.api.spring_security_course.persistence.entity.util;
 
 import java.util.Arrays;
 import java.util.List;

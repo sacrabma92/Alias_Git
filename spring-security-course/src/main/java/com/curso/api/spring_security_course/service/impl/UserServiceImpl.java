@@ -4,12 +4,14 @@ import com.curso.api.spring_security_course.dto.SaveUser;
 import com.curso.api.spring_security_course.exception.InvalidPasswordException;
 import com.curso.api.spring_security_course.persistence.entity.User;
 import com.curso.api.spring_security_course.persistence.repository.UserRepository;
-import com.curso.api.spring_security_course.persistence.repository.util.Role;
+import com.curso.api.spring_security_course.persistence.entity.util.Role;
 import com.curso.api.spring_security_course.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+@Service
 public class UserServiceImpl implements UserService {
 
    @Autowired
@@ -31,9 +33,7 @@ public class UserServiceImpl implements UserService {
       user.setPassword(passwordEncoder.encode(newUser.getPassword()));
       user.setRole(Role.ROLE_CUSTOMER);
 
-      userRepository.save(user);
-
-      return null;
+      return userRepository.save(user);
    }
 
    // Metodo para validar el password
