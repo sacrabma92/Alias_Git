@@ -39,6 +39,7 @@ public class AuthenticationService {
         return userDto;
     }
 
+    // Payload del JWT
     private Map<String, Object> generateExtraClaims(User user) {
         Map<String, Object> extraClaims = new HashMap<>();
         extraClaims.put("name", user.getName());

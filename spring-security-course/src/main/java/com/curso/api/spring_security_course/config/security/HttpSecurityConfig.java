@@ -17,6 +17,7 @@ public class HttpSecurityConfig {
     @Autowired
     private AuthenticationProvider authenticationProvider;
 
+    // Cadena para filtro de seguridad
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 
