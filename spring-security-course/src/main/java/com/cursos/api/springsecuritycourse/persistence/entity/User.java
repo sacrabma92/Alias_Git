@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Entity
@@ -32,10 +33,13 @@ public class User implements UserDetails {
         // Si en permisos NO llega nada salimos.
         if(role.getRolePermission() == null) return null;
 
-        return role.getRolePermission().stream()
+        List<SimpleGrantedAuthority> authorities = role.getRolePermission().stream()
                 .map(each -> each.name())
                 .map(each -> new SimpleGrantedAuthority(each))
                 .collect(Collectors.toList());
+
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + this.role.name()));
+        return authorities;
     }
 
     // Obtenemos el password
