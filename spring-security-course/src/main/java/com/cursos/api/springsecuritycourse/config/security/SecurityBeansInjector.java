@@ -34,7 +34,7 @@ public class SecurityBeansInjector {
       // setPasswordEncoder compara el password y encripta la constraseña
       authenticationStrategy.setPasswordEncoder( passwordEncoder() );
       // setUserDetailsService envia a la BD user y trae el payload
-      authenticationStrategy.setUserDetailsService( null );
+      authenticationStrategy.setUserDetailsService( userDetailsService() );
 
       // Retornamos la respuesta
       return authenticationStrategy;
@@ -51,7 +51,7 @@ public class SecurityBeansInjector {
    @Bean
    public UserDetailsService userDetailsService(){
       return (username) -> {
-         return userRepository.findByUserName(username)
+         return userRepository.findByUsername(username)
                  .orElseThrow(()-> new ObjectNotFoundException("User not found with username " + username));
       };
    }
