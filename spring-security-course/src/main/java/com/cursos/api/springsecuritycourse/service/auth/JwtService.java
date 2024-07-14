@@ -1,5 +1,6 @@
 package com.cursos.api.springsecuritycourse.service.auth;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -51,5 +52,20 @@ public class JwtService {
     private SecretKey generateKey(){
         byte[] passwordDecoded = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(passwordDecoded);
+    }
+
+    // Metodo que va a extraer el username del Payload
+    public String extractUsername(String jwt) {
+        // Extraemos todos los datos del claim y va a tomar el propietario del claim
+        return extractAllClaims(jwt).getSubject();
+    }
+
+    // Metodos que van a validar el Payload del JWT
+    private Claims extractAllClaims(String jwt) {
+        return Jwts.parser()
+                .verifyWith( generateKey() )
+                .build()
+                .parseSignedClaims(jwt)
+                .getPayload();
     }
 }

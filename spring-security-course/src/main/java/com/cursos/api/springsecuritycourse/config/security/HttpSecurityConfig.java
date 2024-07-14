@@ -32,7 +32,8 @@ public class HttpSecurityConfig {
             .authorizeHttpRequests( authReqConfig -> {
                 // Unicas rutas que son publicas y cualquiera pueden acceder
                 authReqConfig.requestMatchers(HttpMethod.POST, "/customers").permitAll();
-                authReqConfig.requestMatchers(HttpMethod.POST, "/auth/**").permitAll();
+                authReqConfig.requestMatchers(HttpMethod.POST, "/auth/authenticate").permitAll();
+                authReqConfig.requestMatchers(HttpMethod.GET, "/auth/validate-token").permitAll();
 
                 // Todas las demas rutas estaran bloqueadas, necesitaran autenticación
                 authReqConfig.anyRequest().authenticated();
