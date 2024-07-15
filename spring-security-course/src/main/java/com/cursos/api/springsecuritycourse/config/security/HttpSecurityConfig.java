@@ -13,13 +13,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AuthorizeHttpRequestsConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.RegexRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity(prePostEnabled = true)
+//@EnableMethodSecurity(prePostEnabled = true)
 public class HttpSecurityConfig {
 
     @Autowired
@@ -27,6 +29,12 @@ public class HttpSecurityConfig {
 
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
+
+    @Autowired
+    private AuthenticationEntryPoint authenticationEntryPoint;
+
+    @Autowired
+    private AccessDeniedHandler accessDeniedHandler;
 
     // Cadena para filtro de seguridad
     @Bean
@@ -42,17 +50,20 @@ public class HttpSecurityConfig {
             // Configuramos la estraetegia
             .authenticationProvider( authenticationProvider )
             // Configuracion de las rutas
-//            .authorizeHttpRequests( authReqConfig -> {
-//
-//                buildRequestMatchersv2(authReqConfig);
-//            })
+            .authorizeHttpRequests( authReqConfig -> {
+                buildRequestMatchers(authReqConfig);
+            })
+                .exceptionHandling(exceptionConfig -> {
+                    exceptionConfig.authenticationEntryPoint(authenticationEntryPoint);
+                    exceptionConfig.accessDeniedHandler(accessDeniedHandler);
+                })
                 .build();
         return filterChain;
     }
 
     private static void buildRequestMatchers(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry authReqConfig) {
 
-    /*// Autorización de enpoinds de Prodcuts
+    // Autorización de enpoinds de Prodcuts
 
         authReqConfig.requestMatchers(HttpMethod.GET, "/products")
                 .hasAnyAuthority(Role.ADMINISTRATOR.name(), Role.ASSISTANT_ADMINISTRATOR.name());
@@ -99,19 +110,19 @@ public class HttpSecurityConfig {
         authReqConfig.requestMatchers(HttpMethod.GET, "/auth/validate-token").permitAll();
 
         // Todas las demas rutas estaran bloqueadas, necesitaran autenticación
-        authReqConfig.anyRequest().authenticated();*/
+        authReqConfig.anyRequest().authenticated();
     }
 
     private static void buildRequestMatchersv2(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry authReqConfig) {
 
-        /* AUtorización de Enpoind Publicos */
-
-        // Unicas rutas que son publicas y cualquiera pueden acceder
-        authReqConfig.requestMatchers(HttpMethod.POST, "/customers").permitAll();
-        authReqConfig.requestMatchers(HttpMethod.POST, "/auth/authenticate").permitAll();
-        authReqConfig.requestMatchers(HttpMethod.GET, "/auth/validate-token").permitAll();
-
-        // Todas las demas rutas estaran bloqueadas, necesitaran autenticación
-        authReqConfig.anyRequest().authenticated();
+//        /* AUtorización de Enpoind Publicos */
+//
+//        // Unicas rutas que son publicas y cualquiera pueden acceder
+//        authReqConfig.requestMatchers(HttpMethod.POST, "/customers").permitAll();
+//        authReqConfig.requestMatchers(HttpMethod.POST, "/auth/authenticate").permitAll();
+//        authReqConfig.requestMatchers(HttpMethod.GET, "/auth/validate-token").permitAll();
+//
+//        // Todas las demas rutas estaran bloqueadas, necesitaran autenticación
+//        authReqConfig.anyRequest().authenticated();
     }
 }
